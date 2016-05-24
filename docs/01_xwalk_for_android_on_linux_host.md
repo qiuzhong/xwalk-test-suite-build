@@ -115,3 +115,8 @@ export CROSSWALK_APP_TOOLS_CACHE_DIR=~/xwalk/xwalk_zip
 export CROSSWALK_APP_TOOLS_HOME=~/xwalk/crosswalk-app-tools
 export PATH=$PATH:$CROSSWALK_APP_TOOLS_HOME/src
 ```
+
+## Check if the environment is ready
+```Bash
+$ crosswalk-app check android
+```
