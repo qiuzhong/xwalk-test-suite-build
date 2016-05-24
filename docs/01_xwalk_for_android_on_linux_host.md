@@ -3,19 +3,26 @@
 ## Prerequisites:
 * Ubuntu Linux 14.04 x86_64
 
-# Notice:
-In this guide, we will install all the tools(except for the node) at
-** ~/xwalk/**
+## Notice:
+In this guide, we will install all the tools (except for the node) at **~/xwalk/**
+
+```Bash
+$ mkdir -pv ~/xwalk
+```
 
 ## Install necessary packages
 ```Bash
 $ sudo apt-get install build-essential git tree openssh-server
 ```
 
+All the tools are supposed to stored at **~/Downloads**
+
 ## Install JDK
 ```Bash
+$ cd ~/Downloads
 $ tar -xvf jdk-8u91-linux-x64.tar.gz
-$ mv -fv mv -fv jdk1.8.0_91/ <path/to/your/jdk/path>
+$ mkdir -pv ~/xwalk/jdk
+$ mv -fv jdk1.8.0_91/ ~/xwalk/jdk/
 ```
 
 Add the following environment variables like this:
@@ -26,6 +33,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 # Install ant
 ```Bash
+$ cd ~/Downloads
 $ tar -xvf apache-ant-1.9.6-bin.tar.gz
 $ mv -fv apache-ant-1.9.6 ~/
 $ vim ~/.bashrc
@@ -35,6 +43,7 @@ export PATH=$PATH:$ANT_HOME/bin
 
 ## Install Node
 ```Bash
+$ cd ~/Downloads
 $ wget https://nodejs.org/dist/v4.4.5/node-v4.4.5.tar.gz
 $ tar -xvf node-v4.4.5.tar.gz
 $ cd node-v4.4.5/
@@ -64,6 +73,7 @@ $ sudo apt-get install lib32stdc++6 lib32z1
 ```
 
 ```Bash
+$ cd ~/Downloads
 $ tar -xvf android-sdk_r24.4.1-linux.tgz
 $ mv -fv android-sdk-linux/ ~/xwalk/
 ```
@@ -93,6 +103,7 @@ export PATH=$PATH:$CROSSWALK_APP_TOOLS_HOME/src
 
 ## Install Crosswalk-app-tools
 ```Bash
+$ cd ~/xwalk/
 $ git clone https://github.com/crosswalk-project/crosswalk-app-tools.git
 $ cd crosswalk-app-tools
 $ sudo npm install --verbose
