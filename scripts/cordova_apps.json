@@ -1,0 +1,55 @@
+{
+    "master": "20",
+    "beta": "19",
+    "stable": "18",
+
+    "20": [
+        "CIRC",
+        "Eh",
+        "helloworld",
+        "loadExtension",
+        "mobilespec",
+        "privateNotes",
+        "remotedebugging",
+        "renamePkg",
+        "sampleRelease",
+        "setBackgroundColor",
+        "setUserAgent",
+        "spacedodge",
+        "statusbar",
+        "xwalkCommandLine"        
+    ],
+
+    "19": [
+        "CIRC",
+        "Eh",
+        "helloworld",
+        "loadExtension",
+        "mobilespec",
+        "privateNotes",
+        "remotedebugging",
+        "renamePkg",
+        "sampleRelease",
+        "setBackgroundColor",
+        "setUserAgent",
+        "spacedodge",
+        "statusbar",
+        "xwalkCommandLine" 
+    ],
+
+    "18": [
+        "CIRC",
+        "Eh",
+        "helloworld",
+        "loadExtension",
+        "mobilespec",
+        "privateNotes",
+        "remotedebugging",
+        "renamePkg",
+        "setBackgroundColor",
+        "setUserAgent",
+        "spacedodge",
+        "statusbar",
+        "xwalkCommandLine"
+    ]
+}

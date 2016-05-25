@@ -1,0 +1,12 @@
+{
+	"http_aar_url_prefix": "https://linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk",
+	"xwalk_aar_dir": "/data/jiaxxx_shared/pkg_tools",
+  "xwalk_aar_dir64": "/data/jiaxxx_shared/pkg_tools_64",
+  "pkg_tools_dir": "/data/jiaxxx_shared/pkg_tools",
+  "pkg_tools_dir64": "/data/jiaxxx_shared/pkg_tools_64",
+	"xwalk_zip_dir": "~/pkg_tools_zip",
+  "xwalk_win_dir": "~/pkg_tools_windows",
+  "xwalk_linux_dir": "~/pkg_tools_linux",
+  "jiajia_dir_prefix": "/data/TestSuites_Storage/live/android",
+  "otcqa_dir_prefix": "/mnt/otcqa/2016/crosswalk/android"
+}
