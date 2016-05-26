@@ -11,7 +11,7 @@ $ mkdir -pv ~/xwalk
 All the tools are supposed to stored at ~/Downloads
 
 ## Install JDK
-* Get **jdk-<VERSION>-macosx-x64.dmg** from [Oracle Site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* Get **jdk-8u91-macosx-x64.dmg** from [Oracle Site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Install the dmg file and make sure **javac** and **java** are in the PATH
 
 ## Install ant
