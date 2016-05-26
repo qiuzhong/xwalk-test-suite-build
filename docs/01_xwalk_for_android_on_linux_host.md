@@ -31,7 +31,7 @@ export JAVA_HOME=~/xwalk/jdk/jdk1.8.0_91
 export PATH=$PATH:$JAVA_HOME/bin
 ```
 
-# Install ant
+## Install ant
 ```Bash
 $ cd ~/Downloads
 $ tar -xvf apache-ant-1.9.6-bin.tar.gz
@@ -67,7 +67,8 @@ export NODE_PATH=/usr/local/lib/node_modules
 
 
 ## Install Android SDK for Linux host
-Install 2 32-bit compatibility library on 64-bit system:
+The following 32-bit compatibility library packages need to install if you're using a 64-bit Linux system.
+
 ```Bash
 $ sudo apt-get install lib32stdc++6 lib32z1
 ```
