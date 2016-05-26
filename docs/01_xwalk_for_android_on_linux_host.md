@@ -93,11 +93,12 @@ And other Android API levels, then install them all.
 
 After that, reload the Android SDK manager.
 
-Set the Android SDK releated environment variables
+Set the Android SDK releated environment variables, here we installed build-tools with version 23.0.3
 ```Bash
-export CROSSWALK_APP_TOOLS_CACHE_DIR=~/xwalk/xwalk_zip
-export CROSSWALK_APP_TOOLS_HOME=~/xwalk/crosswalk-app-tools
-export PATH=$PATH:$CROSSWALK_APP_TOOLS_HOME/src
+$ vim ~/.bashrc
+export ANDROID_HOME=~/xwalk/android-sdk-linux
+export BUILD_TOOLS_VERSIN="23.0.3"
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools:$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION:$ANDROID_HOME/platform-tools
 ```
 
 
