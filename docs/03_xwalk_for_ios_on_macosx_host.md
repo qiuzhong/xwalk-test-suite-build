@@ -57,7 +57,7 @@ $ npm install --verbose
 For iOS platform, you need to config the iOS backend of crosswalk-app-tools:
 
 ```sh
-$ cd crosswalk-app-tools/node_modules
+$ cd node_modules
 $ git clone https://github.com/crosswalk-project/crosswalk-app-tools-ios.git crosswalk-app-tools-backend-ios
 $ cd crosswalk-app-tools-backend-ios
 $ npm install --verbose
