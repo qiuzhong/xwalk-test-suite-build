@@ -7,7 +7,8 @@ import subprocess
 
 class CordovaBuilder:
 
-    def __init__(self, cts_dir, xwalk_branch, xwalk_version, mode, arch):
+    def __init__(self, cts_dir, xwalk_branch, xwalk_version, mode, arch,
+                commandline_only = False):
         self.cts_dir = cts_dir
         self.xwalk_branch = xwalk_branch
         self.xwalk_version = xwalk_version
@@ -15,6 +16,7 @@ class CordovaBuilder:
         self.arch = arch
         self.jiajia_dir = None
         self.otcqa_dir = None
+        self.commandline_only = commandline_only
 
 
     def set_dest_dir(self):
@@ -46,10 +48,16 @@ class CordovaBuilder:
                                         'tools',
                                         'cordova_plugins',
                                         'cordova-plugin-crosswalk-webview')
+        if self.commandline_only:
+            print('cd {d}'.format(d = cordova_plugin_xwalk_webivew_dir))
         os.chdir(cordova_plugin_xwalk_webivew_dir)
         xwalk_gradle = 'platforms/android/xwalk.gradle'
-        os.system('git checkout -- ' \
-                '{xwalk_gradle}'.format(xwalk_gradle = xwalk_gradle))
+        cmd = 'git checkout -- ' \
+              '{xwalk_gradle}'.format(xwalk_gradle = xwalk_gradle)
+        if self.commandline_only:
+            print(cmd)
+        else:
+            os.system(cmd)
 
 
     def update_cordova_plugin_xwalk_webview(self, cca_build = False):
@@ -71,13 +79,11 @@ class CordovaBuilder:
             # modify xwalk.gradle
             cmd = '/bin/sed -n ' + r'"/maven {/ ="' + \
                   ' {xwalk_gradle}'.format(xwalk_gradle = xwalk_gradle)
-            # print(cmd)
             p = subprocess.Popen(cmd,
                                 stdout = subprocess.PIPE,
                                 stderr = subprocess.STDOUT,
                                 shell = True)
             (output, _) = p.communicate()
-            # print(output)
 
             try:
                 start_line = int(output.strip())
@@ -96,9 +102,13 @@ class CordovaBuilder:
                           '{xwalk_gradle}'.format(
                             start_line = start_line,
                             xwalk_gradle = xwalk_gradle)
-            if os.system(delete_cmd) != 0 or os.system(replace_cmd) != 0:
-                sys.stderr.write('Failed to modify xwalk.gradle.')
-                return False
+            if self.commandline_only:
+                print(delete_cmd)
+                print(replace_cmd)
+            else:
+                if os.system(delete_cmd) != 0 or os.system(replace_cmd) != 0:
+                    sys.stderr.write('Failed to modify xwalk.gradle.')
+                    return False
 
             if cca_build:
                 update_cca_version_cmd = '/bin/sed -i ' \
@@ -110,8 +120,10 @@ class CordovaBuilder:
                                          '{xwalk_gradle}'.format(
                                         xwalk_version = self.xwalk_version,
                                         xwalk_gradle = xwalk_gradle)
-                # print(update_cca_version_cmd)
-                os.system(update_cca_version_cmd)
+                if self.commandline_only:
+                    print(update_cca_version_cmd)
+                else:
+                    os.system(update_cca_version_cmd)
 
         if self.xwalk_branch == 'beta':
             if cca_build:
@@ -131,8 +143,10 @@ class CordovaBuilder:
                                         xwalk_version = self.xwalk_version,
                                         mode = mode,
                                         xwalk_gradle = xwalk_gradle)
-                # print(update_cca_version_cmd)
-                os.system(update_cca_version_cmd)
+                if self.commandline_only:
+                    print(update_cca_version_cmd)
+                else:
+                    os.system(update_cca_version_cmd)
         return True
 
 
@@ -153,8 +167,10 @@ class CordovaBuilder:
                         arch = self.arch,
                         mode = self.mode
                         )
-            print(build_cmd)
-            os.system(build_cmd)
+            if self.commandline_only:
+                print(build_cmd)
+            else:
+                os.system(build_cmd)
 
             mv_cmd = 'mv -fv {apk} {dest_dir}'.format(
                             apk = os.path.join(self.cts_dir,
@@ -164,8 +180,10 @@ class CordovaBuilder:
                                                 )),
                             dest_dir = self.jiajia_dir
             )
-            print(mv_cmd)
-            os.system(mv_cmd)
+            if self.commandline_only:
+                print(mv_cmd)
+            else:
+                os.system(mv_cmd)
         elif build_type == 'tc':
             build_cmd = 'cd {cts_dir}/{tc_name};' \
                         '../../tools/build/pack.py -t cordova ' \
@@ -177,8 +195,10 @@ class CordovaBuilder:
                         arch = self.arch,
                         mode = self.mode,
                         dest_dir = self.jiajia_dir)
-            print(build_cmd)
-            os.system(build_cmd)
+            if self.commandline_only:
+                print(build_cmd)
+            else:
+                os.system(build_cmd)
         else:
             sys.stderr.write('Unsupported cordova building type, ' \
                             'exit with 1\n')

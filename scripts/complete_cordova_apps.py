@@ -16,6 +16,7 @@ def get_missing_cordova_apps(configuration,
                              xwalk_version,
                              mode,
                              arch,
+                             commandline_only = False,
                              cordova_prefix = 'cordova4.x'):
     '''Check the missing cordova apps and return a list.'''
     missing_cordova_apps = None
@@ -56,6 +57,10 @@ def get_missing_cordova_apps(configuration,
                         set(all_cordova_apps) - set(present_cordova_apps))
     missing_cordova_apps.sort()
 
+    # if commandline_only and missing_cordova_apps:
+    #     for app in missing_cordova_apps:
+    #         print(app)
+
     return missing_cordova_apps
 
 
@@ -64,22 +69,27 @@ def build_missing_cordova_apps(missing_apps,
                             xwalk_branch,
                             xwalk_version,
                             mode,
-                            arch):
+                            arch,
+                            commandline_only):
     '''Build the missing cordova apps and copy them to jiajia directory.'''
     global PWD
+    if commandline_only:
+        print('cd {pwd}'.format(pwd = PWD))
     os.chdir(PWD)
     if not missing_apps:
         print('The cordova apps are complete, no need to build.')
         return
     else:
         for app in missing_apps:
-            print(app)
             cmd = './build_cordova_apps.py '
             cmd += '-v {xwalk_version} '.format(xwalk_version = xwalk_version)
             cmd += '-a {arch} '.format(arch = arch)
             cmd += '-m {mode} '.format(mode = mode)
             cmd += '-n {name}'.format(name = app)
-            os.system(cmd)
+            if commandline_only:
+                print(cmd)
+            else:
+                os.system(cmd)
 
 def main():
 
@@ -96,7 +106,8 @@ def main():
     parser.add_argument('-a', '--arch', type = str, required = True,
                         help =  'specify the CPU architecture of cordoa app ' \
                                 'with cordova plugin Crosswalk Webview')
-
+    parser.add_argument('-c', '--commandline_only', action = 'store_true',
+                        help = 'specify if print commandline only(no build)')
     args = parser.parse_args()
 
     if len(sys.argv) < 2:
@@ -126,13 +137,15 @@ def main():
                                                     xwalk_branch,
                                                     args.version,
                                                     args.mode,
-                                                    args.arch)
+                                                    args.arch,
+                                                    args.commandline_only)
     build_missing_cordova_apps(missing_cordova_apps,
                             configuration,
                             xwalk_branch,
                             args.version,
                             args.mode,
-                            args.arch)
+                            args.arch,
+                            args.commandline_only)
 
 
 if __name__ == '__main__':

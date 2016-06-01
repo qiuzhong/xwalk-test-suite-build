@@ -10,14 +10,16 @@ import xwalk
 import cordova
 
 
-def build_cordova_app(cts_dir, xwalk_branch, xwalk_version, mode, arch, name):
+def build_cordova_app(cts_dir, xwalk_branch, xwalk_version, mode, arch, name,
+                    commandline_only = False):
 
     cca_build = False
     if name == 'CIRC' or name == 'Eh':
         cca_build = True
     cordova_builder = cordova.CordovaBuilder(cts_dir,
                                             xwalk_branch, xwalk_version,
-                                            mode, arch)
+                                            mode, arch,
+                                            commandline_only)
     cordova_builder.set_dest_dir()
     cordova_builder.recovery_cordova_plugin_xwalk_webview()
     cordova_builder.update_cordova_plugin_xwalk_webview(cca_build)
@@ -44,6 +46,8 @@ def main():
                         help =  'specify if put on the cordova apps to ' \
                                 'otcqa server after copying to ' \
                                 'data directory')
+    parser.add_argument('-c', '--commandline_only', action = 'store_true',
+                        help = 'specify if print commandline only(no build)')
 
     args = parser.parse_args()
 
@@ -71,7 +75,6 @@ def main():
                                 'cts_dir'))
     if args.arch.endswith('64'):
         cts_dir += '-x64'
-    print(cts_dir)
 
     version_json = None
     with open(os.path.join(cts_dir, 'VERSION')) as f:
@@ -86,7 +89,8 @@ def main():
                     xwalk_version,
                     args.mode,
                     args.arch,
-                    args.name)
+                    args.name,
+                    args.commandline_only)
 
 
 if __name__ == '__main__':

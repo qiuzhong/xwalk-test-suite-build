@@ -15,6 +15,7 @@ def get_missing_cordova_tc(configuration,
                             xwalk_version,
                             mode,
                             arch,
+                            commandline_only = False,
                             cordova_prefix = 'cordova4.x'):
     '''Check the missing cordova test suites and return a dict.'''
     missing_cordova_tc = collections.defaultdict(list)
@@ -58,12 +59,12 @@ def get_missing_cordova_tc(configuration,
             if tc_name not in present_cordova_tc:
                 missing_cordova_tc[tc_field].append(tc_name)
 
-    # print(missing_cordova_tc)
     if not missing_cordova_tc:
         print('No missing test suites')
     for tc_field, missing_cordova_tc_list in missing_cordova_tc.items():
         for missing_tc_name in missing_cordova_tc_list:
-            print(os.path.join(tc_field, missing_tc_name))
+            if commandline_only:
+                print(os.path.join(tc_field, missing_tc_name))
 
     return missing_cordova_tc
 
@@ -73,11 +74,13 @@ def build_missing_cordova_tc(missing_cordova_tc,
                             xwalk_branch,
                             xwalk_version,
                             mode,
-                            arch):
+                            arch,
+                            commandline_only):
     if not missing_cordova_tc:
         return
 
     global PWD
+    print('cd {pwd}'.format(pwd = PWD))
     os.chdir(PWD)
     for tc_field, missing_tc_name_list in missing_cordova_tc.items():
         for missing_tc_name in missing_tc_name_list:
@@ -87,7 +90,10 @@ def build_missing_cordova_tc(missing_cordova_tc,
             cmd += '-m {mode} '.format(mode = mode)
             cmd += '-n {name}'.format(name = os.path.join(tc_field,
                                     missing_tc_name))
-            os.system(cmd)
+            if commandline_only:
+                print(cmd)
+            else:
+                os.system(cmd)
 
 
 def main():
@@ -106,6 +112,8 @@ def main():
                         help =  'specify the CPU architecture of ' \
                                 'cordoa test suites with ' \
                                 'cordova plugin Crosswalk Webview')
+    parser.add_argument('-c', '--commandline_only', action = 'store_true',
+                        help = 'specify if print commandline only(no build)')
     args = parser.parse_args()
 
     if len(sys.argv) < 2:
@@ -135,13 +143,15 @@ def main():
                                                 xwalk_branch,
                                                 args.version,
                                                 args.mode,
-                                                args.arch)
+                                                args.arch,
+                                                args.commandline_only)
     build_missing_cordova_tc(missing_cordova_tc,
                             configuration,
                             xwalk_branch,
                             args.version,
                             args.mode,
-                            args.arch)
+                            args.arch,
+                            args.commandline_only)
 
 if __name__ == '__main__':
     global PWD
