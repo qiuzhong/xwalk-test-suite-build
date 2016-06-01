@@ -5,6 +5,8 @@ import sys
 import json
 import argparse
 
+import xwalk
+
 
 class CTSVersion:
 
@@ -12,7 +14,7 @@ class CTSVersion:
         self.version_path = cts_ver_path
         self.version_json = None
 
-    def read_version(self):        
+    def read_version(self):
         data = None
         with open(self.version_path) as f:
             data = f.read()
@@ -56,7 +58,7 @@ class CTSVersion:
             with open(self.version_path, 'w') as f:
                 f.write(updated_version_str)
 
-            print(updated_version_str)                
+            print(updated_version_str)
         except Exception:
             self.recovery_version()
 
@@ -80,20 +82,20 @@ def update_cts_version(cts_dir, xwalk_version):
     ctsver = CTSVersion(cts_version_path)
     print('Before update the version -->')
     ctsver.read_version()
-    print('After update teh version -->')
+    print('After update the version -->')
     ctsver.update_version(xwalk_version)
 
 
 
 def main():
-    
+
     parser = argparse.ArgumentParser(description = \
             'Update the content of VERSION in a crosswalk-test-suite repo.')
-    parser.add_argument('-v', '--version', type = str, 
+    parser.add_argument('-v', '--version', type = str,
                         help = 'Specify the crosswalk version')
-    parser.add_argument('-b', '--branch', type = str, default = 'beta', 
+    parser.add_argument('-b', '--branch', type = str,
                         help = 'Specify if the branch is beta/canary/stable')
-    parser.add_argument('-d', '--ctsdir', type = str, 
+    parser.add_argument('-d', '--ctsdir', type = str,
                         help = 'Specify the root directory of a CTS repo')
 
     args = parser.parse_args()
@@ -105,6 +107,14 @@ def main():
     if not args.version:
         sys.stderr.write('No crosswalk version specified!\n')
         sys.exit(1)
+
+    xwalk_branch = None
+    if not args.branch:
+        xwalk_branch = xwalk.get_xwalk_branch(args.version)
+    else:
+        xwalk_branch = args.branch
+
+    branch_num = xwalk.get_xwalk_branch_num(args.version)
 
     conf_filename = __file__.replace('.py', '.json')
     config = None
@@ -120,11 +130,12 @@ def main():
                 conf_filename = conf_filename))
             sys.exit(1)
 
-        cts_dir = os.path.expanduser(config.get('cts_dir'))
+        cts_dir = os.path.expanduser(config.get(xwalk_branch).get(
+                                                branch_num).get('cts_dir'))
 
     if cts_dir:
         print('Update {cts_dir} with version {version}'.format(
-                cts_dir = cts_dir, 
+                cts_dir = cts_dir,
                 version = args.version))
         update_cts_version(cts_dir, args.version)
 
