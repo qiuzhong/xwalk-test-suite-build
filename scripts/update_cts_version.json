@@ -1,6 +1,6 @@
 {
     "master": {
-        "20": {
+        "21": {
             "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite"
         }
     },
@@ -16,6 +16,9 @@
             },
         "19": {
             "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-19"
+        },
+        "20": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-20"
         }
     }
 
