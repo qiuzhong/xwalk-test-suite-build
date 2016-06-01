@@ -91,7 +91,7 @@ def main():
 
     parser = argparse.ArgumentParser(description = \
             'Update the content of VERSION in a crosswalk-test-suite repo.')
-    parser.add_argument('-v', '--version', type = str,
+    parser.add_argument('-v', '--version', type = str, required = True,
                         help = 'Specify the crosswalk version')
     parser.add_argument('-b', '--branch', type = str,
                         help = 'Specify if the branch is beta/canary/stable')
@@ -102,10 +102,6 @@ def main():
 
     if len(sys.argv) < 2:
         parser.print_help()
-        sys.exit(1)
-
-    if not args.version:
-        sys.stderr.write('No crosswalk version specified!\n')
         sys.exit(1)
 
     xwalk_branch = None

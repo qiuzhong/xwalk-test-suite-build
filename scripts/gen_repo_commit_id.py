@@ -34,7 +34,7 @@ def main():
 
     parser = argparse.ArgumentParser(description = 'Generate a file named '
                                                     'as a commit id')
-    parser.add_argument('-r', '--repodir', type = str,
+    parser.add_argument('-r', '--repodir', type = str, required = True,
                         help = 'specify the root directory of a repo')
     parser.add_argument('-d', '--destdir', type = str,
                         help = 'specify the directory where the commit id' \

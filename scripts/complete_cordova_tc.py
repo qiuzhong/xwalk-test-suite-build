@@ -95,14 +95,14 @@ def main():
     parser = argparse.ArgumentParser(description = \
                                         'List all the missing cordova' \
                                         ' test suites for a cordova release.')
-    parser.add_argument('-v', '--version', type = str,
+    parser.add_argument('-v', '--version', type = str, required = True,
                         help = 'specify the Crosswalk version')
     parser.add_argument('-b', '--branch', type = str,
                         help = 'specify the branch of Crosswalk manually')
-    parser.add_argument('-m', '--mode', type = str,
+    parser.add_argument('-m', '--mode', type = str, required = True,
                         help =  'specify the cordova test suites mode with ' \
                                 'cordova plugin Crosswalk Webview.')
-    parser.add_argument('-a', '--arch', type = str,
+    parser.add_argument('-a', '--arch', type = str, required = True,
                         help =  'specify the CPU architecture of ' \
                                 'cordoa test suites with ' \
                                 'cordova plugin Crosswalk Webview')
@@ -110,18 +110,6 @@ def main():
 
     if len(sys.argv) < 2:
         parser.print_help()
-        sys.exit(1)
-
-    if not args.version:
-        sys.stderr.write('No Crosswalk version specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.mode:
-        sys.stderr.write('No app mode specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.arch:
-        sys.stderr.write('No CPU arch specified, exit with 1\n')
         sys.exit(1)
 
     xwalk_branch = None

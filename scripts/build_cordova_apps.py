@@ -31,13 +31,13 @@ def main():
                                     'Build a cordova sample app.')
     parser.add_argument('-v', '--version', type = str,
                         help =  'Specify the crosswalk version')
-    parser.add_argument('-a', '--arch', type = str, default = 'arm',
+    parser.add_argument('-a', '--arch', type = str, required = True,
                         help =  'specify the CPU architecture, ' \
                                 'arm/arm64/x86/x86_64')
-    parser.add_argument('-m', '--mode', type = str, default = 'embedded',
+    parser.add_argument('-m', '--mode', type = str, required = True,
                         help =  'specify the crosswalk application mode, ' \
                                 'embedded/shared')
-    parser.add_argument('-n', '--name', type = str,
+    parser.add_argument('-n', '--name', type = str, required = True,
                         help =  'specify the cordova app name')
     parser.add_argument('-q', '--putonotcqa', action = 'store_true',
                         default = True,
@@ -49,22 +49,6 @@ def main():
 
     if len(sys.argv) < 2:
         parser.print_help()
-        sys.exit(1)
-
-    if not args.version:
-        sys.stderr.write('No Crosswalk version specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.name:
-        sys.stderr.write('No Crosswalk name specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.mode:
-        sys.stderr.write('No app mode specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.arch:
-        sys.stderr.write('No app arch specified, exit with 1\n')
         sys.exit(1)
 
     cts_json_file = 'update_cts_version.json'

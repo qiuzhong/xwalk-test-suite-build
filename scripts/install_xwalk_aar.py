@@ -10,7 +10,8 @@ args = None
 
 def download_aar(http_prefix, branch, xwalk_version, filename, aar_dir):
 	os.chdir(aar_dir)
-	url = 'wget --no-proxy --no-check-certificate {http_prefix}/{branch}/{xwalk_version}/{filename}'.format(
+	url = 'wget --no-proxy --no-check-certificate ' \
+			'{http_prefix}/{branch}/{xwalk_version}/{filename}'.format(
 				http_prefix = http_prefix,
 				branch = branch,
 				xwalk_version = xwalk_version,
@@ -19,14 +20,15 @@ def download_aar(http_prefix, branch, xwalk_version, filename, aar_dir):
 	if args.commandline:
 		print(url)
 	elif os.path.exists(os.path.join(aar_dir, filename)):
-		print('{path} already exists!'.format(path = os.path.join(aar_dir, filename)))
+		print('{path} already exists!'.format(path = os.path.join(aar_dir,
+																filename)))
 	else:
 		os.system(url)
 
 
 def install_xwalk_aar(filename):
 	data = None
-	
+
 	with open('config.json') as fp:
 		data = json.load(fp)
 
@@ -56,17 +58,20 @@ def install_xwalk_aar(filename):
 			branch = 'beta'
 
 		if bit64:
-			download_aar(http_prefix, branch, xwalk_version, filename, aar_dir64)
+			download_aar(http_prefix, branch, xwalk_version, filename,
+						aar_dir64)
 		else:
-			download_aar(http_prefix, branch, xwalk_version, filename, aar_dir)
+			download_aar(http_prefix, branch, xwalk_version, filename,
+						aar_dir)
 
 		cmd = 'mvn install:install-file -DgroupId=org.xwalk'
 		if not shared:
-			cmd += ' -DartifactId=xwalk_core_library' 
+			cmd += ' -DartifactId=xwalk_core_library'
 		else:
 			cmd += ' -DartifactId=xwalk_shared_library'
 
-		cmd += ' -Dversion={xwalk_version} -Dpackaging=aar'.format(xwalk_version = xwalk_version)
+		cmd += ' -Dversion={xwalk_version} -Dpackaging=aar'.format(
+							xwalk_version = xwalk_version)
 		cmd += ' -Dfile='
 		if bit64:
 			cmd += os.path.join(aar_dir64, filename)
@@ -87,13 +92,20 @@ def install_xwalk_aar(filename):
 
 
 def main():
-	parser = argparse.ArgumentParser(description = 'Download an aar file and install it for cordova app building')
-	parser.add_argument('-v', '--version', type = str, help = 'specify the crosswalk version')
-	parser.add_argument('-l', '--long', action = 'store_true', help = 'specify if the crosswalk is 64bit')
-	parser.add_argument('-s', '--shared', action = 'store_true', help = 'specifiy if the aar file for cordova app is shared')
-	parser.add_argument('-c', '--commandline', action = 'store_true', help = 'only print the command line for development')
+	parser = argparse.ArgumentParser(description = \
+									'Download an aar file and install it ' \
+									'for cordova app building')
+	parser.add_argument('-v', '--version', type = str, required = True,
+						help = 'specify the crosswalk version')
+	parser.add_argument('-l', '--long', action = 'store_true',
+						help = 'specify if the crosswalk is 64bit')
+	parser.add_argument('-s', '--shared', action = 'store_true',
+						help = 	'specifiy if the aar file for cordova app is '\
+								'shared')
+	parser.add_argument('-c', '--commandline', action = 'store_true',
+						help = 'only print the command line for development')
 
-	global args 
+	global args
 	args = parser.parse_args()
 
 	if len(sys.argv) < 2:
@@ -117,8 +129,9 @@ def main():
 	if args.shared:
 		shared = '-shared'
 
-	aar_filename = aar_filename_format.format(shared = shared, version = xwalk_version, is64bit = is64bit)
-
+	aar_filename = aar_filename_format.format(shared = shared,
+												version = xwalk_version,
+												is64bit = is64bit)
 	install_xwalk_aar(aar_filename)
 
 

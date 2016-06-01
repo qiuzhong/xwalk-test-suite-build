@@ -9,14 +9,17 @@ import argparse
 args = None
 
 
-def download_file(http_prefix, branch, xwalk_version, filename, zip_dir, platform = 'android'):
+def download_file(http_prefix, branch, xwalk_version, filename, zip_dir,
+					platform = 'android'):
 
 	xwalk_type = ''
 	if platform == 'linux':
 		xwalk_type = '/deb'
 
 	os.chdir(zip_dir)
-	url = 'wget --no-proxy --no-check-certificate {http_prefix}/{platform}{extra}/{branch}/{xwalk_version}/{filename}'.format(
+	url = 'wget --no-proxy --no-check-certificate ' \
+			'{http_prefix}/{platform}{extra}/' \
+			'{branch}/{xwalk_version}/{filename}'.format(
 				http_prefix = http_prefix,
 				platform = platform,
 				extra = xwalk_type,
@@ -27,14 +30,15 @@ def download_file(http_prefix, branch, xwalk_version, filename, zip_dir, platfor
 	if args.commandline:
 		print(url)
 	elif os.path.exists(os.path.join(zip_dir, filename)):
-		print('{path} already exists!'.format(path = os.path.join(zip_dir, filename)))
+		print('{path} already exists!'.format(path = os.path.join(zip_dir,
+																filename)))
 	else:
 		os.system(url)
 
 
 def download_xwalk_zip(filename, platform = 'android'):
 	data = None
-	
+
 	with open('config.json') as fp:
 		data = json.load(fp)
 
@@ -51,7 +55,7 @@ def download_xwalk_zip(filename, platform = 'android'):
 
 		xwalk_version = xwalk_version.replace('crosswalk-', '')
 		xwalk_version = xwalk_version.replace('crosswalk64-', '')
-		xwalk_version = xwalk_version.replace('crosswalk_', '')		
+		xwalk_version = xwalk_version.replace('crosswalk_', '')
 
 		if '64bit' in filename:
 			bit64 = True
@@ -66,13 +70,16 @@ def download_xwalk_zip(filename, platform = 'android'):
 			branch = 'canary'
 		else:
 			branch = 'beta'
-		
+
 		if platform == 'android':
-			download_file(http_prefix, branch, xwalk_version, filename, android_zip_dir)
+			download_file(http_prefix, branch, xwalk_version, filename,
+						android_zip_dir)
 		elif platform == 'windows':
-			download_file(http_prefix, branch, xwalk_version, filename, windows_zip_dir, platform)
+			download_file(http_prefix, branch, xwalk_version, filename,
+						windows_zip_dir, platform)
 		elif platform == 'linux':
-			download_file(http_prefix, branch, xwalk_version, filename, linux_deb_dir, platform)			
+			download_file(http_prefix, branch, xwalk_version, filename,
+						linux_deb_dir, platform)
 		else:
 			sys.stderr.write('Not supported platform!\n')
 			sys.exit(1)
@@ -81,13 +88,22 @@ def download_xwalk_zip(filename, platform = 'android'):
 
 
 def main():
-	parser = argparse.ArgumentParser(description = 'Download a crosswalk zip file.')
-	parser.add_argument('-v', '--version', type = str, help = 'specify the crosswalk version')
-	parser.add_argument('-l', '--long', action = 'store_true', help = 'specify if the crosswalk is 64bit')
-	parser.add_argument('-a', '--android', action = 'store_true', default = True, help = 'specify if the crosswalk is for Android, default option')
-	parser.add_argument('-w', '--windows', action = 'store_true', help = 'specify if the crosswalk is for Windows')
-	parser.add_argument('-x', '--linux', action = 'store_true', help = 'specify if the crosswalk is for Linux')
-	parser.add_argument('-c', '--commandline', action = 'store_true', help = 'only print the command line for development')
+	parser = argparse.ArgumentParser(description = \
+									'Download a crosswalk zip file.')
+	parser.add_argument('-v', '--version', type = str, required = True,
+						help = 'specify the crosswalk version')
+	parser.add_argument('-l', '--long', action = 'store_true',
+						help = 'specify if the crosswalk is 64bit')
+	parser.add_argument('-a', '--android', action = 'store_true',
+						default = True,
+						help = 	'specify if the crosswalk is for Android, ' \
+								'default option')
+	parser.add_argument('-w', '--windows', action = 'store_true',
+						help = 'specify if the crosswalk is for Windows')
+	parser.add_argument('-x', '--linux', action = 'store_true',
+						help = 'specify if the crosswalk is for Linux')
+	parser.add_argument('-c', '--commandline', action = 'store_true',
+						help = 'only print the command line for development')
 
 	global args
 	args = parser.parse_args()
@@ -129,14 +145,18 @@ def main():
 		sys.exit(1)
 
 	if xwalk_version:
-		zip_filename = zip_filename_format.format(version = xwalk_version, is64bit = is64bit)
-		deb_filename = deb_filename_format.format(version = xwalk_version, arch = arch)
+		zip_filename = zip_filename_format.format(version = xwalk_version,
+												is64bit = is64bit)
+		deb_filename = deb_filename_format.format(version = xwalk_version,
+												arch = arch)
 
 		# After 19.48.495.0. the crosswalk
 		has64 = ''
 		if xwalk_version > '19.48.495.0':
 			has64 = '64'
-		win_filename = win_filename_format.format(has64 = has64, version = xwalk_version, is64bit = is64bit)
+		win_filename = win_filename_format.format(has64 = has64,
+												version = xwalk_version,
+												is64bit = is64bit)
 
 	if args.linux:
 		download_xwalk_zip(deb_filename, platform)

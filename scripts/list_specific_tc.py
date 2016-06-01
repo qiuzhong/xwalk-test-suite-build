@@ -33,24 +33,16 @@ def main():
     parser = argparse.ArgumentParser(description = 'List all the test suites' \
                                                     ' with a specific tag name'
                                     )
-    parser.add_argument('-d', '--ctsdir', type = str,
+    parser.add_argument('-d', '--ctsdir', type = str, required = True,
                         help = 'specify the root directory of a ' \
                                 'crosswalk-test-suite repo')
-    parser.add_argument('-t', '--tag', type = str,
+    parser.add_argument('-t', '--tag', type = str, required = True,
                         help = 'specify the tag name to search')
 
     args = parser.parse_args()
 
     if len(sys.argv) < 2:
         parser.print_help()
-        sys.exit(1)
-
-    if not args.ctsdir:
-        sys.stderr.write('No CTS directory specified, exit with 1\n')
-        sys.exit(1)
-
-    if not args.tag:
-        sys.stderr.write('No tag name specified, exit with 1\n')
         sys.exit(1)
 
     for tc in list_specific_tc(os.path.expanduser(args.ctsdir), args.tag):
