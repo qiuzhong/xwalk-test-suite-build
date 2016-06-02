@@ -8,11 +8,13 @@ import argparse
 
 args = None
 
-def download_aar(http_prefix, branch, xwalk_version, filename, aar_dir):
+def download_aar(http_prefix, branch, xwalk_version, filename, aar_dir,
+				xwalk_type = 'android'):
 	os.chdir(aar_dir)
 	url = 'wget --no-proxy --no-check-certificate ' \
-			'{http_prefix}/{branch}/{xwalk_version}/{filename}'.format(
+		'{http_prefix}/{xwalk_type}/{branch}/{xwalk_version}/{filename}'.format(
 				http_prefix = http_prefix,
+				xwalk_type = xwalk_type,
 				branch = branch,
 				xwalk_version = xwalk_version,
 				filename = filename
@@ -33,9 +35,9 @@ def install_xwalk_aar(filename):
 		data = json.load(fp)
 
 	if data:
-		http_prefix = data.get('http_aar_url_prefix')
-		aar_dir = data.get('xwalk_aar_dir')
-		aar_dir64 = data.get('xwalk_aar_dir64')
+		http_prefix = os.path.expanduser(data.get('http_aar_url_prefix'))
+		aar_dir = os.path.expanduser(data.get('xwalk_aar_dir'))
+		aar_dir64 = os.path.expanduser(data.get('xwalk_aar_dir64'))
 
 		(xwalk_version, ext) = os.path.splitext(filename)
 		branch = None
