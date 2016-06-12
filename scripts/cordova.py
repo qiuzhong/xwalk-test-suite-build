@@ -8,7 +8,7 @@ import subprocess
 class CordovaBuilder:
 
     def __init__(self, cts_dir, xwalk_branch, xwalk_version, mode, arch,
-                commandline_only = False):
+                commandline_only = False, putonotcqa = False):
         self.cts_dir = cts_dir
         self.xwalk_branch = xwalk_branch
         self.xwalk_version = xwalk_version
@@ -17,6 +17,7 @@ class CordovaBuilder:
         self.jiajia_dir = None
         self.otcqa_dir = None
         self.commandline_only = commandline_only
+        self.putonotcqa = putonotcqa
 
 
     def set_dest_dir(self):
@@ -184,6 +185,23 @@ class CordovaBuilder:
                 print(mv_cmd)
             else:
                 os.system(mv_cmd)
+
+            put_on_otcqa_cmd = 'cp -fv {jiajia_path} {otcqa_path}'.format(
+                jiajia_path = os.path.join(self.jiajia_dir,
+                                        '{app_name}.apk'.format(
+                                        app_name = name)),
+                otcqa_path = os.path.join(self.otcqa_dir,
+                                        '{app_name}.apk'.format(
+                                        app_name = name))
+            )
+            if self.putonotcqa:
+                if self.commandline_only:
+                    print(put_on_otcqa_cmd)
+                else:
+                    if not os.path.exists(self.otcqa_dir):
+                        os.system('mkdir -pv {otcqa_dir}'.format(
+                                    otcqa_dir = self.otcqa_dir))
+                    os.system(put_on_otcqa_cmd)
         elif build_type == 'tc':
             build_cmd = 'cd {cts_dir}/{tc_name};' \
                         '../../tools/build/pack.py -t cordova ' \
@@ -199,31 +217,52 @@ class CordovaBuilder:
                 print(build_cmd)
             else:
                 os.system(build_cmd)
+
+            put_on_otcqa_cmd = 'cp -fv {jiajia_path} {otcqa_path}'.format(
+                jiajia_path = os.path.join(self.jiajia_dir,
+                                '{tc_name}-{version}-1.cordova.zip'.format(
+                                    tc_name = name.split('/')[-1],
+                                    version = self.xwalk_version
+                                )),
+                otcqa_path = os.path.join(self.otcqa_dir,
+                                '{tc_name}-{version}-1.cordova.zip'.format(
+                                    tc_name = name.split('/')[-1],
+                                    version = self.xwalk_version
+                                ))
+            )
+            if self.putonotcqa:
+                if self.commandline_only:
+                    print(put_on_otcqa_cmd)
+                else:
+                    if not os.path.exists(self.otcqa_dir):
+                        os.system('mkdir -pv {otcqa_dir}'.format(
+                                    otcqa_dir = self.otcqa_dir))
+                    os.system(put_on_otcqa_cmd)
         else:
             sys.stderr.write('Unsupported cordova building type, ' \
                             'exit with 1\n')
             sys.exit(1)
 
 
-if __name__ == '__main__':
-    cts_dir = '/home/orange/00_jiajia/work_space/release/crosswalk-test-suite'
-    xwalk_branch = None
-    xwalk_version = None
-    mode = 'embedded'
-    arch = 'x86'
-
-    version_json = None
-    with open(os.path.join(cts_dir, 'VERSION')) as f:
-        version_json = json.load(f)
-
-    xwalk_branch = version_json.get('crosswalk-branch')
-    xwalk_version = version_json.get('main-version')
-
-    helloworld = CordovaBuilder(cts_dir,
-                                xwalk_branch,
-                                xwalk_version,
-                                mode,
-                                arch)
-    helloworld.recovery_cordova_plugin_xwalk_webview()
-    helloworld.update_cordova_plugin_xwalk_webview()
-    helloworld.build_cordova('spacedodge', 'apps')
+# if __name__ == '__main__':
+#     cts_dir = '/home/orange/00_jiajia/work_space/release/crosswalk-test-suite'
+#     xwalk_branch = None
+#     xwalk_version = None
+#     mode = 'embedded'
+#     arch = 'x86'
+#
+#     version_json = None
+#     with open(os.path.join(cts_dir, 'VERSION')) as f:
+#         version_json = json.load(f)
+#
+#     xwalk_branch = version_json.get('crosswalk-branch')
+#     xwalk_version = version_json.get('main-version')
+#
+#     helloworld = CordovaBuilder(cts_dir,
+#                                 xwalk_branch,
+#                                 xwalk_version,
+#                                 mode,
+#                                 arch)
+#     helloworld.recovery_cordova_plugin_xwalk_webview()
+#     helloworld.update_cordova_plugin_xwalk_webview()
+#     helloworld.build_cordova('spacedodge', 'apps')

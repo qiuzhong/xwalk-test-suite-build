@@ -11,7 +11,7 @@ import cordova
 
 
 def build_cordova_app(cts_dir, xwalk_branch, xwalk_version, mode, arch, name,
-                    commandline_only = False):
+                    commandline_only = False, putonotcqa = False):
 
     cca_build = False
     if name == 'CIRC' or name == 'Eh':
@@ -19,7 +19,8 @@ def build_cordova_app(cts_dir, xwalk_branch, xwalk_version, mode, arch, name,
     cordova_builder = cordova.CordovaBuilder(cts_dir,
                                             xwalk_branch, xwalk_version,
                                             mode, arch,
-                                            commandline_only)
+                                            commandline_only,
+                                            putonotcqa)
     cordova_builder.set_dest_dir()
     cordova_builder.recovery_cordova_plugin_xwalk_webview()
     cordova_builder.update_cordova_plugin_xwalk_webview(cca_build)
@@ -41,13 +42,13 @@ def main():
                                 'embedded/shared')
     parser.add_argument('-n', '--name', type = str, required = True,
                         help =  'specify the cordova app name')
+    parser.add_argument('-c', '--commandline_only', action = 'store_true',
+                        help = 'specify if print commandline only(no build)')
     parser.add_argument('-q', '--putonotcqa', action = 'store_true',
-                        default = True,
+                        default = False,
                         help =  'specify if put on the cordova apps to ' \
                                 'otcqa server after copying to ' \
                                 'data directory')
-    parser.add_argument('-c', '--commandline_only', action = 'store_true',
-                        help = 'specify if print commandline only(no build)')
 
     args = parser.parse_args()
 
@@ -90,7 +91,8 @@ def main():
                     args.mode,
                     args.arch,
                     args.name,
-                    args.commandline_only)
+                    args.commandline_only,
+                    args.putonotcqa)
 
 
 if __name__ == '__main__':

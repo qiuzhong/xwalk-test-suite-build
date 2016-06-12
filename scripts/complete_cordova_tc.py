@@ -75,7 +75,8 @@ def build_missing_cordova_tc(missing_cordova_tc,
                             xwalk_version,
                             mode,
                             arch,
-                            commandline_only):
+                            commandline_only,
+                            putonotcqa):
     if not missing_cordova_tc:
         return
 
@@ -90,6 +91,8 @@ def build_missing_cordova_tc(missing_cordova_tc,
             cmd += '-m {mode} '.format(mode = mode)
             cmd += '-n {name}'.format(name = os.path.join(tc_field,
                                     missing_tc_name))
+            if putonotcqa:
+                cmd += ' -q'
             if commandline_only:
                 print(cmd)
             else:
@@ -114,6 +117,11 @@ def main():
                                 'cordova plugin Crosswalk Webview')
     parser.add_argument('-c', '--commandline_only', action = 'store_true',
                         help = 'specify if print commandline only(no build)')
+    parser.add_argument('-q', '--putonotcqa', action = 'store_true',
+                        default = False,
+                        help =  'specify if put on the cordova apps to ' \
+                                'otcqa server after copying to ' \
+                                'data directory')
     args = parser.parse_args()
 
     if len(sys.argv) < 2:
@@ -151,7 +159,8 @@ def main():
                             args.version,
                             args.mode,
                             args.arch,
-                            args.commandline_only)
+                            args.commandline_only,
+                            args.putonotcqa)
 
 if __name__ == '__main__':
     global PWD

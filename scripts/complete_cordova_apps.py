@@ -9,7 +9,6 @@ import argparse
 
 import xwalk
 
-# PWD = None
 
 def get_missing_cordova_apps(configuration,
                              xwalk_branch,
@@ -70,7 +69,8 @@ def build_missing_cordova_apps(missing_apps,
                             xwalk_version,
                             mode,
                             arch,
-                            commandline_only):
+                            commandline_only,
+                            putonotcqa):
     '''Build the missing cordova apps and copy them to jiajia directory.'''
     global PWD
     if commandline_only:
@@ -86,10 +86,13 @@ def build_missing_cordova_apps(missing_apps,
             cmd += '-a {arch} '.format(arch = arch)
             cmd += '-m {mode} '.format(mode = mode)
             cmd += '-n {name}'.format(name = app)
+            if putonotcqa:
+                cmd += ' -q'
             if commandline_only:
                 print(cmd)
             else:
                 os.system(cmd)
+
 
 def main():
 
@@ -108,6 +111,11 @@ def main():
                                 'with cordova plugin Crosswalk Webview')
     parser.add_argument('-c', '--commandline_only', action = 'store_true',
                         help = 'specify if print commandline only(no build)')
+    parser.add_argument('-q', '--putonotcqa', action = 'store_true',
+                        default = False,
+                        help =  'specify if put on the cordova apps to ' \
+                                'otcqa server after copying to ' \
+                                'data directory')
     args = parser.parse_args()
 
     if len(sys.argv) < 2:
@@ -145,7 +153,8 @@ def main():
                             args.version,
                             args.mode,
                             args.arch,
-                            args.commandline_only)
+                            args.commandline_only,
+                            args.putonotcqa)
 
 
 if __name__ == '__main__':

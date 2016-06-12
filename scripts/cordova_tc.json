@@ -42,9 +42,25 @@
       "webapi-appsecurity-external-tests"
     ]
   },
-  "19":[
-
-  ],
+  "19":{
+    "cordova": [
+      "cordova-feature-android-tests",
+      "cordova-sampleapp-android-tests",
+      "cordova-webapp-android-tests"
+    ],
+    "misc": [
+      "webapi-noneservice-tests",
+      "webapi-service-docroot-tests",
+      "webapi-service-tests"
+    ],
+    "usecase": [
+      "usecase-cordova-android-tests",
+      "usecase-webapi-xwalk-tests"
+    ],
+    "webapi": [
+      "webapi-appsecurity-external-tests"
+    ]
+  },
   "18":[
 
   ]
