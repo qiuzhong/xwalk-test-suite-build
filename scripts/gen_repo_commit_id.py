@@ -38,16 +38,8 @@ def main():
                         help = 'specify the root directory of a repo')
     parser.add_argument('-d', '--destdir', type = str,
                         help = 'specify the directory where the commit id' \
-                                'file is stored.')
+                                ' file is stored.')
     args = parser.parse_args()
-
-    if len(sys.argv) < 2:
-        parser.print_help()
-        sys.exit(1)
-
-    if not args.repodir:
-        sys.stderr.write('No repo directory specified, exit with 1!\n')
-        sys.exit(1)
 
     destdir = None
     if not args.destdir:
