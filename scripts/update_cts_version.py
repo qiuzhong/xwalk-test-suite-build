@@ -97,6 +97,8 @@ def main():
                         help = 'Specify if the branch is beta/canary/stable')
     parser.add_argument('-d', '--ctsdir', type = str,
                         help = 'Specify the root directory of a CTS repo')
+    parser.add_argument('-l', '--long', action = 'store_true',
+                        help = 'Specify if the CTS directory is for 64bit')
 
     args = parser.parse_args()
 
@@ -128,6 +130,8 @@ def main():
 
         cts_dir = os.path.expanduser(config.get(xwalk_branch).get(
                                                 branch_num).get('cts_dir'))
+        if args.long:
+            cts_dir += '-x64'
 
     if cts_dir:
         print('Update {cts_dir} with version {version}'.format(
