@@ -1,5 +1,6 @@
 {
 	"http_aar_url_prefix": "https://linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk",
+	"android_all_dir_prefix": "~/00_jiajia/images/linux-ftp.sh.intel.com/pub/mirrors/01org/crosswalk/releases/crosswalk/android/",
 	"xwalk_aar_dir": "/data/jiaxxx_shared/pkg_tools",
   "xwalk_aar_dir64": "/data/jiaxxx_shared/pkg_tools_64",
   "pkg_tools_dir": "/data/jiaxxx_shared/pkg_tools",
