@@ -30,18 +30,25 @@ It's for installing the dependency modules when creating an iOS project via the 
 ```sh
 $ sudo gem install cocoapods
 ```
+* You find the installation hangs
 
-You may encounter the following error:
+  You probably need a proxy for gem but you use a **sudo** command to lift the permission but this proxy configuration is not recognized in **/etc/sudoers**
+  Add the following line to the sudoers file
+  ```
+  Defaults env_keep += "http_proxy https_proxy"
+  ```
 
-> ERROR: While executing gem ... (Errno::EPERM)
->
-> Operation not permitted - /usr/bin/pod
+* You may encounter the following error:
 
-In that case, you can fix it via the command:
+  > ERROR: While executing gem ... (Errno::EPERM)
+  >
+  > Operation not permitted - /usr/bin/pod
 
-```sh
-$ sudo gem install -n /usr/local/bin cocoapods
-```
+  In that case, you can fix it via the command:
+
+  ```sh
+  $ sudo gem install -n /usr/local/bin cocoapods
+  ```  
 
 ### Install crosswalk-app-tools
 Suggest to install it locally, first clone it from [github](https://github.com/crosswalk-project/crosswalk-app-tools):
