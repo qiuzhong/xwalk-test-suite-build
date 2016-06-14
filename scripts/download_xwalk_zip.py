@@ -16,7 +16,10 @@ def download_file(http_prefix, branch, xwalk_version, filename, zip_dir,
 	if platform == 'linux':
 		xwalk_type = '/deb'
 
+	if args.commandline:
+		print('cd {zip_dir}'.format(zip_dir = zip_dir))
 	os.chdir(zip_dir)
+
 	url = 'wget --no-proxy --no-check-certificate ' \
 			'{http_prefix}/{platform}{extra}/' \
 			'{branch}/{xwalk_version}/{filename}'.format(
