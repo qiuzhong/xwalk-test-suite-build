@@ -1,0 +1,15 @@
+{
+  "arches": ["arm", "arm64", "x86", "x86_64"],
+  "arch_files": [
+      "crosswalk-apks-{version}-{arch}.zip",
+      "crosswalk-test-apks-{version}-{arch}.zip",
+      "crosswalk-webview-{version}-{arch}.zip"
+  ],
+  "non_arch_files": [
+    "crosswalk-{version}-64bit.aar",
+    "crosswalk-{version}-64bit.zip",
+    "crosswalk-{version}.aar",
+    "crosswalk-{version}.zip",
+    "crosswalk-shared-{version}.aar"
+  ]
+}

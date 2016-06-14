@@ -1,0 +1,6 @@
+{
+  "arches": ["amd64", "i386"],
+  "linux_xwalk_deb": [
+    "crosswalk_{version}-1_{arch}.deb"
+  ]
+}
