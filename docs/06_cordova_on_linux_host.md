@@ -43,3 +43,9 @@ For the first time cordova building application, it will try to download the gra
 ```
 
 ```
+
+### Solution to fix this issue:
+```
+$ vim ~/.bashrc
+export JAVA_OPTS="-Dhttp.proxyHost=child-prc.intel.com -Dhttp.proxyPort=913 -Dhttps.proxyHost=child-prc.intel.com -Dhttps.proxyPort=913"
+```
