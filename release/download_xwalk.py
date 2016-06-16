@@ -245,9 +245,6 @@ def download_windows_xwalk(configuration, xwalk_branch, xwalk_version,
 
 def download_linux_xwalk(configuration, xwalk_branch, xwalk_version,
                         commandline_only = False):
-    # print('download_windows_xwalk -> {xwalk_branch}-{xwalk_version}'.format(
-    #                                 xwalk_branch = xwalk_branch,
-    #                                 xwalk_version = xwalk_version))
     if not check_to_download(configuration, 'linux'):
         sys.stderr.write('Not ready to download linux xwalk binary!\n')
         return
@@ -323,11 +320,11 @@ def main():
     parser.add_argument('-w', '--windows', action = 'store_true',
                         default = False,
                         help = 'specify if the Crosswalk binary to download '\
-                                'is for Android')
+                                'is for Windows')
     parser.add_argument('-x', '--linux', action = 'store_true',
                         default = False,
                         help = 'specify if the Crosswalk binary to download '\
-                                'is for Android')
+                                'is for Linux')
     parser.add_argument('-c', '--commandline_only', action = 'store_true',
                         default = False,
                         help = 'only print the command line for development')
@@ -352,7 +349,7 @@ def main():
             configuration = json.load(fp)
     except Exception:
         sys.stderr.write('Failed to read json configuration ' \
-                        'from config.json, exit with 1\n')
+                        'from ../script/config.json, exit with 1\n')
         sys.exit(1)
 
     if args.android:
