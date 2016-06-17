@@ -19,9 +19,6 @@ import xwalk
 
 def unzip_android_xwalk(configuration, xwalk_branch, xwalk_version,
                         commandline_only = False):
-    # print('unzip android xwalk binary: {branch}->{version}'.format(
-    #         branch = xwalk_branch, version = xwalk_version
-    # ))
     android_config = None
     try:
         with open('android_xwalk.json') as f:
