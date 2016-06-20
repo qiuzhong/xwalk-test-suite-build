@@ -8,7 +8,6 @@ import argparse
 import xwalk
 
 
-
 def unzip_cordova_zip(dir_prefix, xwalk_branch, xwalk_version, mode, arch,
                         cordova_prefix = 'cordova4.x', clean = True):
     zip_dir = os.path.join(dir_prefix, xwalk_branch, xwalk_version,
@@ -73,6 +72,9 @@ def main():
 
     if not args.version:
         sys.stderr.write('No Crosswalk version specified, exit with 1\n')
+        sys.exit(1)
+    if not xwalk.check_xwalk_version_valid(args.version):
+        sys.stderr.write('Invalid Crosswalk version!\n')
         sys.exit(1)
 
     configuration = None

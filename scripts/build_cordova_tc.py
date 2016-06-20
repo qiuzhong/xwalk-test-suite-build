@@ -53,6 +53,9 @@ def main():
     if len(sys.argv) < 2:
         parser.print_help()
         sys.exit(1)
+    if not xwalk.check_xwalk_version_valid(args.version):
+        sys.stderr.write('Invalid Crosswalk version!\n')
+        sys.exit(1)
 
     cts_json_file = 'update_cts_version.json'
     cts_json = None

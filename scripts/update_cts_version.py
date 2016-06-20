@@ -106,6 +106,10 @@ def main():
         parser.print_help()
         sys.exit(1)
 
+    if not xwalk.check_xwalk_version_valid(args.version):
+        sys.stderr.write('Invalid Crosswalk version!\n')
+        sys.exit(1)
+
     xwalk_branch = None
     if not args.branch:
         xwalk_branch = xwalk.get_xwalk_branch(args.version)

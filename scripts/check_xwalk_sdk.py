@@ -5,6 +5,8 @@ import sys
 import json
 import argparse
 
+import xwalk
+
 
 def check(path):
     if os.path.exists(path):
@@ -140,6 +142,10 @@ def main():
 
     if len(sys.argv) < 2:
         parser.print_help()
+        sys.exit(1)
+
+    if not xwalk.check_xwalk_version_valid(args.version):
+        sys.stderr.write('Invalid Crosswalk version!\n')
         sys.exit(1)
 
     check_xwalk_sdk(args)

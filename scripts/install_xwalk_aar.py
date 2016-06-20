@@ -5,6 +5,8 @@ import json
 import sys
 import argparse
 
+immport xwalk
+
 
 args = None
 
@@ -120,6 +122,11 @@ def main():
 
 	xwalk_version = None
 	aar_filename_format = 'crosswalk{shared}-{version}{is64bit}.aar'
+
+    if not xwalk.check_xwalk_version_valid(args.version):
+		sys.stderr.write('Invalid Crosswalk version!\n')
+		sys.exit(1)
+
 	if args.version:
 		xwalk_version = args.version
 

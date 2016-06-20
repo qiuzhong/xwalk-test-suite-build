@@ -15,6 +15,35 @@ def get_xwalk_branch(xwalk_version):
     return xwalk_branch
 
 
+def check_xwalk_version_valid(xwalk_version):
+    '''Given a specific Crosswalk version, check if the version is valid'''
+    versions = xwalk_version.split('.')
+    if len(versions) != 4:
+        return False
+
+    if len(versions[0]) != 2:
+        return False
+
+    if len(versions[1]) != 2:
+        return False
+
+    if len(versions[2]) != 3:
+        return False
+
+    if len(versions[3]) >= 3:
+        return False
+
+    try:
+        major = int(versions[0])
+        minor = int(versions[1])
+        patch = int(versions[2])
+        serial = int(versions[3])
+    except Exception:
+        return False
+
+    return True
+
+
 def get_xwalk_branch_num(xwalk_version):
     '''Get the xwalk branch number from a version
     For example, version is 18.48.477.13, the branch number is 18

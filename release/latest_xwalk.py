@@ -54,8 +54,7 @@ def get_http_prefix(configuration, platform, branch_name):
                                     '/'.join(['crosswalk',
                                         platform, branch_name
                                     ]))
-    return ver_url
-
+    return ver_url.replace('https', 'http')
 
 
 def detect_url_version(ver_url, filter_func):
@@ -97,16 +96,19 @@ def get_latest_version(ver_url, branch_name, filter_func):
 
     (branch_num, latest_version) = detect_url_version(ver_url, filter_func)
     version_info[branch]['branch_name'] = branch_name
-    version_info[branch]['branch_number'] = branch_num
-    version_info[branch]['latest_version'] = latest_version
+    if branch_name != 'beta':
+        version_info[branch]['branch_number'] = branch_num
+        version_info[branch]['latest_version'] = latest_version
+    else:
+        version_info[branch]['branch_number'] = []
+        version_info[branch]['latest_version'] = []
+        version_info[branch]['branch_number'].append(branch_num)
+        version_info[branch]['latest_version'].append(latest_version)
 
     return version_info
 
 
 def get_latest_beta_versions(ver_url, stable_branch_num, master_branch_num):
-    '''
-
-    '''
     beta_version_info = {}
     beta_version_info['beta'] = {}
     beta_version_info['beta']['branch_name'] = 'beta'
@@ -129,22 +131,38 @@ def get_latest_beta_versions(ver_url, stable_branch_num, master_branch_num):
 
 
 def check_if_xwalk_ver_changed(origin_config,
-                            master_ver, beta_ver, stable_ver):
+                                master_ver, beta_ver, stable_ver, platform):
     if master_ver['master']['branch_number'] >= \
         origin_config['master']['branch_number'] and \
         distutils.version.LooseVersion(
             master_ver['master']['latest_version']) > \
-        distutils.verson.LooseVersion(
+        distutils.version.LooseVersion(
             origin_config['master']['latest_version']):
         return True
 
-    if stable_ver['stable']['branch_number'] >= \
-        origin_config['stable']['branch_number'] and \
-        distutils.version.LooseVersion(
-            stable_ver['stable']['latest_version']) > \
-        distutils.version.LooseVersion(
-            stable_ver['stable']['latest_version']):
-        return True
+    if platform == 'android':
+        if stable_ver['stable']['branch_number'] >= \
+            origin_config['stable']['branch_number'] and \
+            distutils.version.LooseVersion(
+                stable_ver['stable']['latest_version']) > \
+            distutils.version.LooseVersion(
+                stable_ver['stable']['latest_version']):
+            return True
+
+    if platform == 'android' or platform == 'windows':
+        if len(beta_ver['beta']['branch_number']) != \
+            len(origin_config['beta']['branch_number']) and \
+            len(beta_ver['beta']['latest_version']) != \
+            len(origin_config['beta']['latest_version']):
+            return True
+
+        for i, latest_version in enumerate(beta_ver['beta']['latest_version']):
+            if distutils.version.LooseVersion(latest_version) > \
+                distutils.version.LooseVersion(
+                    origin_config['beta']['latest_version'][i]):
+                return True
+
+    return False
 
 
 def get_latest_android_xwalk(configuration, commandline_only = False):
@@ -172,16 +190,13 @@ def get_latest_android_xwalk(configuration, commandline_only = False):
                             latest_stable_ver_info['stable']['branch_number'],
                             latest_master_ver_info['master']['branch_number'])
 
-    # print(latest_master_ver_info)
-    # print(latest_stable_ver_info)
-    # print(latest_beta_ver_info)
-
-    # xwalk_android_ver_change = check_if_xwalk_ver_changed(
-    #                             xwalk_android_ver_config,
-    #                             latest_master_ver_info,
-    #                             latest_beta_ver_info,
-    #                             latest_stable_ver_info
-    #                             )
+    xwalk_android_ver_change = check_if_xwalk_ver_changed(
+                                    xwalk_android_ver_config,
+                                    latest_master_ver_info,
+                                    latest_beta_ver_info,
+                                    latest_stable_ver_info,
+                                    platform = "android"
+                                    )
     print(json.dumps(xwalk_android_ver_config, indent = 4, sort_keys = True))
     print('-' * 80)
     new_config = {}
@@ -189,11 +204,14 @@ def get_latest_android_xwalk(configuration, commandline_only = False):
     new_config.update(latest_beta_ver_info)
     new_config.update(latest_stable_ver_info)
     print(json.dumps(new_config, indent = 4, sort_keys = True))
-    # if xwalk_android_ver_change:
-    #     if commandline_only:
-    #         pass
-    #     else:
-    #         pass
+    if xwalk_android_ver_change:
+        if commandline_only:
+            print('Write new latest versions to Android version config file.')
+        else:
+            with open('latest_android_xwalk_version.json', 'w') as f:
+                json.dump(new_config, f, indent = 4, sort_keys = True)
+    else:
+        print('No Crosswalk for Android binary update!')
 
 
 def get_latest_windows_xwalk(configuration, commandline_only = False):
@@ -208,21 +226,33 @@ def get_latest_windows_xwalk(configuration, commandline_only = False):
     beta_ver_url = get_http_prefix(configuration, 'windows',
                         beta_info.get('branch_name'))
 
-    latest_master_ver_info = get_latest_version(master_ver_url, 'master',
+    latest_master_ver_info = get_latest_version(master_ver_url, 'canary',
                                         lambda link: link.string != '../' and \
                                                     link.string != 'latest/')
     latest_beta_ver_info = get_latest_version(beta_ver_url, 'beta',
                             lambda link: link.string != '../' and \
                                         link.string != 'latest/')
-
-    # print(latest_masert_ver_info)
-    # print(latest_beta_ver_info)
+    xwalk_windows_ver_change = check_if_xwalk_ver_changed(
+                                    xwalk_windows_ver_config,
+                                    latest_master_ver_info,
+                                    latest_beta_ver_info,
+                                    None,
+                                    platform = "windows"
+                                    )
     print(json.dumps(xwalk_windows_ver_config, indent = 4, sort_keys = True))
     print('-' * 80)
     new_config = {}
     new_config.update(latest_master_ver_info)
     new_config.update(latest_beta_ver_info)
     print(json.dumps(new_config, indent = 4, sort_keys = True))
+    if xwalk_windows_ver_change:
+        if commandline_only:
+            print('Write new latest versions to Windows version config file.')
+        else:
+            with open('latest_windows_xwalk_version.json', 'w') as f:
+                json.dump(new_config, f, indent = 4, sort_keys = True)
+    else:
+        print('No Crosswalk for Windows binary update!')
 
 
 def get_latest_linux_xwalk(configuration, commandline_only = False):
@@ -233,15 +263,29 @@ def get_latest_linux_xwalk(configuration, commandline_only = False):
     master_ver_url = get_http_prefix(configuration, 'linux',
                         master_info.get('branch_name'))
 
-    latest_master_ver_info = xwalk_linux_ver_config(master_ver_url, 'master',
+    latest_master_ver_info = get_latest_version(master_ver_url, 'canary',
                                         lambda link: link.string != '../' and \
                                                     link.string != 'latest/')
-    # print(latest_masert_ver_info)
-    print(json.dumps(xwalk_windows_ver_config, indent = 4, sort_keys = True))
+    xwalk_linux_ver_change = check_if_xwalk_ver_changed(
+                                    xwalk_linux_ver_config,
+                                    latest_master_ver_info,
+                                    None,
+                                    None,
+                                    platform = "linux"
+                                    )
+    print(json.dumps(xwalk_linux_ver_config, indent = 4, sort_keys = True))
     print('-' * 80)
     new_config = {}
     new_config.update(latest_master_ver_info)
     print(json.dumps(new_config, indent = 4, sort_keys = True))
+    if xwalk_linux_ver_change:
+        if commandline_only:
+            print('Write new latest versions to Linux version config file.')
+        else:
+            with open('latest_linux_xwalk_version.json', 'w') as f:
+                json.dump(new_config, f, indent = 4, sort_keys = True)
+    else:
+        print('No Crosswalk for Linux binary update!')
 
 
 def main():

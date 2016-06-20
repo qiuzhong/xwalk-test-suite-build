@@ -5,6 +5,7 @@ import json
 import sys
 import argparse
 
+import xwalk
 
 args = None
 
@@ -126,6 +127,10 @@ def main():
 	win_filename_format = 'crosswalk{has64}-{version}{is64bit}.zip'
 	deb_filename_format = 'crosswalk_{version}-1_{arch}.deb'
 	xwalk_version = None
+
+	if not xwalk.check_xwalk_version_valid(args.version):
+		sys.stderr.write('Invalid Crosswalk version!\n')
+		sys.exit(1)
 
 	if args.version:
 		xwalk_version = args.version

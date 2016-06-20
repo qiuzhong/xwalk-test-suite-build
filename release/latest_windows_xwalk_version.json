@@ -6,7 +6,7 @@
   },
   "beta": {
     "branch_name": "beta",
-    "branch_number": 20,
-    "latest_version": "20.50.533.5"
+    "branch_number": [20],
+    "latest_version": ["20.50.533.5"]
   }
 }
