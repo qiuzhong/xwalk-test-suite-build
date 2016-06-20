@@ -122,9 +122,9 @@ def get_latest_beta_versions(ver_url, stable_branch_num, master_branch_num):
                                                 link.string.startswith(str(
                                                     beta_branch_num
                                                 )))
-        beta_version_info['beta']['branch_number'].append(
+        beta_version_info['beta']['branch_number'].extend(
                         ver['beta']['branch_number'])
-        beta_version_info['beta']['latest_version'].append(
+        beta_version_info['beta']['latest_version'].extend(
                         ver['beta']['latest_version'])
 
     return beta_version_info
