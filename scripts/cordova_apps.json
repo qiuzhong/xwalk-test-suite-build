@@ -68,5 +68,9 @@
         "spacedodge",
         "statusbar",
         "xwalkCommandLine"
-    ]
+    ],
+    "special_app": [
+        "mobilespec"
+    ],
+    "host_password": "000"
 }

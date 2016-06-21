@@ -168,6 +168,11 @@ class CordovaBuilder:
                         arch = self.arch,
                         mode = self.mode
                         )
+            with open('cordova_app.json') as f:
+                cordova_app_config = json.load(f)
+            if name in cordova_app_config.get('special_app'):
+                build_cmd += '-p {passwd}'.format(
+                            passwd = cordova_app_config.get('host_password'))
             if self.commandline_only:
                 print(build_cmd)
             else:
