@@ -11,6 +11,7 @@ import subprocess
 
 
 def gen_commit_id(repodir, destdir):
+    os.chdir(repodir)
     git_cmd = ['git', 'log', '-1', '--pretty=oneline']
     p = subprocess.Popen(git_cmd,
                         stdout = subprocess.PIPE,
