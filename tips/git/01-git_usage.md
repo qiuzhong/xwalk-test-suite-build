@@ -31,7 +31,7 @@ In Intel, we use the following proxy for git:
 
 ```
 git config --global http.proxy http://child-prc.intel.com:913
-git config --global http.proxy http://child-prc.intel.com:913
+git config --global https.proxy http://child-prc.intel.com:913
 ```
 
 ### Reference:
