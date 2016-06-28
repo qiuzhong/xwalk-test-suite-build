@@ -140,7 +140,7 @@ def check_if_xwalk_ver_changed(origin_config,
             origin_config['master']['latest_version']):
         return True
 
-    if platform == 'android':
+    if platform == 'android' or platform == 'windows':
         if stable_ver['stable']['branch_number'] >= \
             origin_config['stable']['branch_number'] and \
             distutils.version.LooseVersion(
@@ -149,7 +149,6 @@ def check_if_xwalk_ver_changed(origin_config,
                 stable_ver['stable']['latest_version']):
             return True
 
-    if platform == 'android' or platform == 'windows':
         if len(beta_ver['beta']['branch_number']) != \
             len(origin_config['beta']['branch_number']) and \
             len(beta_ver['beta']['latest_version']) != \
@@ -220,23 +219,29 @@ def get_latest_windows_xwalk(configuration, commandline_only = False):
                                 'latest_windows_xwalk_version.json')
     master_info = xwalk_windows_ver_config.get('master')
     beta_info = xwalk_windows_ver_config.get('beta')
+    stable_info = xwalk_windows_ver_config.get('stable')
 
     master_ver_url = get_http_prefix(configuration, 'windows',
                         master_info.get('branch_name'))
+    stable_ver_url = get_http_prefix(configuration, 'windows',
+                        stable_info.get('branch_name'))
     beta_ver_url = get_http_prefix(configuration, 'windows',
                         beta_info.get('branch_name'))
 
     latest_master_ver_info = get_latest_version(master_ver_url, 'canary',
                                         lambda link: link.string != '../' and \
                                                     link.string != 'latest/')
-    latest_beta_ver_info = get_latest_version(beta_ver_url, 'beta',
+    latest_stable_ver_info = get_latest_version(stable_ver_url, 'stable',
                             lambda link: link.string != '../' and \
                                         link.string != 'latest/')
+    latest_beta_ver_info = get_latest_beta_versions(beta_ver_url,
+                            latest_stable_ver_info['stable']['branch_number'],
+                            latest_master_ver_info['master']['branch_number'])
     xwalk_windows_ver_change = check_if_xwalk_ver_changed(
                                     xwalk_windows_ver_config,
                                     latest_master_ver_info,
                                     latest_beta_ver_info,
-                                    None,
+                                    latest_stable_ver_info,
                                     platform = "windows"
                                     )
     print(json.dumps(xwalk_windows_ver_config, indent = 4, sort_keys = True))
@@ -244,6 +249,7 @@ def get_latest_windows_xwalk(configuration, commandline_only = False):
     new_config = {}
     new_config.update(latest_master_ver_info)
     new_config.update(latest_beta_ver_info)
+    new_config.update(latest_stable_ver_info)
     print(json.dumps(new_config, indent = 4, sort_keys = True))
     if xwalk_windows_ver_change:
         if commandline_only:

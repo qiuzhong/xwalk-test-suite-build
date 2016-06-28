@@ -1,12 +1,21 @@
 {
-  "master": {
-    "branch_name": "canary",
-    "branch_number": 21,
-    "latest_version": "21.50.540.0"
-  },
-  "beta": {
-    "branch_name": "beta",
-    "branch_number": [20],
-    "latest_version": ["20.50.533.5"]
-  }
+    "beta": {
+        "branch_name": "beta",
+        "branch_number": [
+            20
+        ],
+        "latest_version": [
+            "20.50.533.6"
+        ]
+    },
+    "master": {
+        "branch_name": "canary",
+        "branch_number": 21,
+        "latest_version": "21.51.542.0"
+    },
+    "stable": {
+        "branch_name": "stable",
+        "branch_number": 19,
+        "latest_version": "19.49.514.4"
+    }
 }
