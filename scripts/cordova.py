@@ -38,7 +38,7 @@ class CordovaBuilder:
         self.otcqa_dir = os.path.join(config_json.get('otcqa_dir_prefix'),
                                         self.xwalk_branch,
                                         self.xwalk_version,
-                                        'cordova-{mode}'.format(
+                                        'cordova4.x-{mode}'.format(
                                                     mode = self.mode),
                                         self.arch)
 

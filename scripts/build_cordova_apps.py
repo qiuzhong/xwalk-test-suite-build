@@ -78,8 +78,8 @@ def main():
                                 xwalk_branch).get(
                                 branch_num).get(
                                 'cts_dir'))
-    if args.arch.endswith('64'):
-        cts_dir += '-x64'
+    #if args.arch.endswith('64'):
+    #    cts_dir += '-x64'
 
     version_json = None
     with open(os.path.join(cts_dir, 'VERSION')) as f:
