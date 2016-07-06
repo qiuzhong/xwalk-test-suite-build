@@ -137,42 +137,6 @@ def check_test_suite(json_config_file):
     return True
 
 
-class TestSuite:
-
-    CTS_DIR = None
-
-    def __init__(self, component, testsuite):
-        self.component = component
-        self.testsuite = testsuite
-
-        self.supports_android = False
-        self.supports_windows = False
-        self.support_linux = False
-        self.support_ios = False
-        self.is_apptools = False
-
-        self.android_tc_num = None
-        self.windows_tc_num = None
-        self.linux_tc_num = None
-        self.ios_tc_num = None
-
-        self.android_xml = None
-        self.windows_xml = None
-        self.linux_xml = None
-        self.ios_xml = None
-
-
-    @classmethod
-    def set_cts_dir(cls, cts_dir):
-        cls.CTS_DIR = os.path.expanduser(cts_dir)
-
-
-    def check_test_suite(self):
-        abs_tc_dir = os.path.join(TestSuite.CTS_DIR,
-                                self.component,
-                                self.testsuite)
-        return os.path.exists(abs_tc_dir)
-
 
 
 if __name__ == '__main__':
@@ -193,7 +157,7 @@ if __name__ == '__main__':
     # cts_dir = json_data.get('cts_dir')
     # component = 'apptools'
 
-    # cts_dir = '~/01_qiuzhong/02-git/crosswalk-project/crosswalk-test-suite'
+    cts_dir = '~/01_qiuzhong/02-git/crosswalk-project/crosswalk-test-suite'
     # component = 'usecase'
     # testsuite = 'usecase-apptools-tests'
     # platforms = 'all'
