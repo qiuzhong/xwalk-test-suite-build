@@ -1,0 +1,466 @@
+{
+    "cts_dir": "~/01_qiuzhong/02-git/crosswalk-project/crosswalk-test-suite",
+    "test_suite": {
+        "apptools": {
+            "apptools/apptools-android-tests": "tests.full.xml",
+            "apptools/apptools-ios-tests": "tests.full.xml",
+            "apptools/apptools-linux-tests": "tests.full.xml",
+            "apptools/apptools-manifest-tests": "tests.full.xml",
+            "apptools/apptools-sampleapp-tests": "tests.full.xml",
+            "apptools/apptools-windows-tests": "tests.full.xml",
+            "usecase/usecase-apptools-tests": "tests.full.xml"
+        },
+
+        "webapi": {
+            "webapi/tct-2dtransforms-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-3dtransforms-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-animations-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-animationtiming-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-appcache-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-audio-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml",
+                "linux": "tests.full.xml"
+            },
+            "webapi/tct-backgrounds-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-batterystatus-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-browserstate-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-canvas-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-colors-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-cors-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-csp-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-deviceorientation-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"                
+            },
+            "webapi/tct-dnd-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"                
+            },
+            "webapi/tct-extra-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-fileapi-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-filesystemapi-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-filewriterapi-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-flexiblebox-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-fonts-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-forms-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-fullscreen-nonw3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-geoallow-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-geodeny-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-gumallow-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-indexeddb-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-jsenhance-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-mediacapture-w3c-tests": {
+                "android": "tests.full.xml"
+            },
+            "webapi/tct-mediaqueries-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-multicolumn-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-navigationtiming-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-netinfo-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-notification-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml",
+                "linux": "tests.linux.xml"
+            },
+            "webapi/tct-pagevisibility-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-sandbox-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-screenorientation-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-selectorslevel1-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-selectorslevel2-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-sessionhistory-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-sse-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-svg-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-text-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-touchevent-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-transitions-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-typedarrays-nonw3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-ui-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-vibration-w3c-tests": {
+                "android": "tests.full.xml"
+            },
+            "webapi/tct-video-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml",
+                "linux": "tests.full.xml"
+            },
+            "webapi/tct-webaudio-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-webdatabase-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-webmessaging-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-websocket-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-webstorage-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-workers-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/tct-xmlhttprequest-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+
+            "webapi/webapi-appsecurity-external-tests": {
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-appuri-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-deviceadaptation-css3-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-gamepad-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-hrtime-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-iap-xwalk-tests": {
+                "android": "tests.full.xml"
+            },
+            "webapi/webapi-imports-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-input-html5-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-nativefilesystem-xwalk-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-performancetimeline-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-presentation-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-promises-nonw3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-rawsockets-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+
+            "webapi/webapi-resourcetiming-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-serviceworkers-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-simd-nonw3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-twoinone-xwalk-tests": {
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-usertiming-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-webgl-khronos-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-webrtc-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "webapi/webapi-webspeech-w3c-tests": {
+                "android": "tests.full.xml",
+                "windows": "tests.full.xml"
+            },
+            "misc/webmanu-system-android-tests": {
+                "android": "tests.full.xml"
+            }
+        },
+
+        "wrt": {
+            "wrt/wrt-coreshellmanu-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-googleplay-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-internetstdmanu-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-packagemgt-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-packagemgtmanu-tests": {
+                "android": "tests.full.xml",
+                "windows":"tests.full.xml"
+            },
+            "wrt/wrt-packagemgt-windows-tests": {
+                "windows":"tests.full.xml"
+            },
+            "wrt/wrt-rtcoremanu-tests": {
+                "android": "tests.full.xml",
+                "windows":"tests.full.xml"
+            },
+            "wrt/wrt-rt-linux-tests": {
+                "linux":"tests.full.xml"
+            },
+            "wrt/wrt-security-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-securitymanu-tests": {
+                "android": "tests.full.xml",
+                "windows":"tests.full.xml"
+            },
+            "wrt/wrt-sharedmode-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-sharedmodemanu-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-upgrademanu-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "wrt/wrt-uxmanu-tests": {
+                "android": "tests.full.xml",
+                "windows":"tests.full.xml"
+            }            
+        },
+        "usecase": {
+            "usecase/usecase-embedding-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "usecase/usecase-extension-android-tests": {
+                "android": "tests.android.xml"
+            },
+            "usecase/usecase-extension-windows-tests": {
+                "windows":"tests.full.xml"
+            },
+            "usecase/usecase-ios-tests": {
+                "ios":"tests.full.xml"
+            },
+            "usecase/usecase-litewrt-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "usecase/usecase-realsense-xwalk-tests": {
+                "windows":"tests.full.xml"
+            },
+            "usecase/usecase-webapi-xwalk-tests": {
+                "android": "tests.android.xml",
+                "windows":"tests.windows.xml"
+            },
+            "usecase/usecase-wrt-android-tests": {
+                "android": "tests.android.xml"
+            },
+            "usecase/usecase-wrt-linux-tests": {
+                "linux":"tests.full.xml"
+            },
+            "usecase/usecase-wrt-windows-tests": {
+                "windows":"tests.xml"
+            }
+        },
+        "cordova-feature": {
+            "cordova/cordova-api-ios-tests": {
+                "ios":"tests.full.xml"
+            },
+            "cordova/cordova-feature-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "cordova/cordova-lite-android-tests": {
+                "lite": "tests.full.xml"
+            },
+
+            "cordova/cordova-webapp-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "webapi/webapi-appsecurity-external-tests": {
+                "android": "tests.full.xml"
+            }            
+        },
+
+        "cordova-usecase": {
+            "usecase/usecase-cordova-android-tests": {
+                "android": "tests.full.xml"
+            }
+        },
+        "cordova-sample": {
+            "cordova/cordova-sampleapp-android-tests": {
+                "android": "tests.full.xml"
+            }            
+        },
+
+        "embeddingapi": {
+            "embeddingapi/embedding-api-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "embeddingapi/embedding-api-ios-tests": {
+                "ios":"tests.full.xml"
+            },
+            "embeddingapi/embedding-asyncapi-android-tests": {
+                "android": "tests.full.xml"
+            }        
+        },
+
+        "sampleapp": {
+            "misc/sampleapp-android-tests": {
+                "android": "tests.full.xml"
+            },
+            "misc/sampleapp-windows-tests": {
+                "windows": "tests.full.xml"
+            }
+        },
+        "realsense": {
+            "webapi/webapi-realsense-xwalk-tests": {
+                "windows": "tests.full.xml"
+            }          
+        }
+
+    }
+}

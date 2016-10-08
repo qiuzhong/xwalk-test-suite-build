@@ -1,8 +1,46 @@
 {
-  "master": "21",
-  "beta": "20",
-  "stable": "19",
+  "master": "23",
+  "beta": "22",
+  "stable": "20",
 
+  "23": {
+    "cordova": [
+      "cordova-feature-android-tests",
+      "cordova-sampleapp-android-tests",
+      "cordova-webapp-android-tests"
+    ],
+    "misc": [
+      "webapi-noneservice-tests",
+      "webapi-service-docroot-tests",
+      "webapi-service-tests"
+    ],
+    "usecase": [
+      "usecase-cordova-android-tests",
+      "usecase-webapi-xwalk-tests"
+    ],
+    "webapi": [
+      "webapi-appsecurity-external-tests"
+    ]
+  },
+  "22": {
+    "cordova": [
+      "cordova-feature-android-tests",
+      "cordova-sampleapp-android-tests",
+      "cordova-webapp-android-tests"
+    ],
+    "misc": [
+      "webapi-noneservice-tests",
+      "webapi-service-docroot-tests",
+      "webapi-service-tests"
+    ],
+    "usecase": [
+      "usecase-cordova-android-tests",
+      "usecase-webapi-xwalk-tests"
+    ],
+    "webapi": [
+      "webapi-appsecurity-external-tests"
+    ]
+  },
   "21": {
     "cordova": [
       "cordova-feature-android-tests",

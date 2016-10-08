@@ -1,10 +1,33 @@
 {
     "master": {
-        "21": {
+        "23": {
             "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite"
         }
     },
     "beta": {
+        "16": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-16"
+            },
+        "17": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-17"
+            },
+        "18": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-18"
+            },
+        "19": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-19"
+        },
+        "20": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-20"
+        },
+        "21": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-21"
+        },
+        "22": {
+            "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-22"
+        }        
+    },
+    "stable": {
         "16": {
             "cts_dir": "~/00_jiajia/work_space/release/crosswalk-test-suite-16"
             },

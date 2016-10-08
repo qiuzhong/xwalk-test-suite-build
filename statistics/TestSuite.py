@@ -128,3 +128,10 @@ class TestSuite:
 
             if 'ios' in pack_type:
                 self.support_ios = True
+
+
+if __name__ == '__main__':
+    webstorage = TestSuite('webapi', 'tct-webstorage-w3c-tests')
+    TestSuite.set_cts_dir(os.path.expanduser()'~/00_jiajia/work_space/release/crosswalk-test-suite'))
+    webstorage.read_suite_json()
+    print(webstorage.)

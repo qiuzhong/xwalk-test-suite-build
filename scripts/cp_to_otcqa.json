@@ -1,9 +1,26 @@
 {
     "android": {
-        "jiajia_dir_prefix": "",
-        "otcqa_dir_prefix": ""
+        "jiajia_dir_prefix": "/data/TestSuites_Storage/live/android",
+        "jiajia_apk_prefix": "testsuites-",
+        "jiajia_cordova_prefix": "cordova4.x-",
 
+        "otcqa_dir_prefix": "/mnt/otcqa/2016/crosswalk/android",
+        "otcqa_apk_prefix": "testsuites-",
+        "otcqa_cordova_prefix": "cordova4.x-",
+
+        "modes": ["embedded", "shared"],
+        "arch32": ["arm", "x86"],
+        "arch64": ["arm64", "x86_64"],
+
+        "testsuites": [
+          "usecase",
+          "sampleapp",
+          "wrt",
+          "aio"
+        ],
+        "cordova": [
+          "apps",
+          "tc"
+        ]
     }
-
-    
 }

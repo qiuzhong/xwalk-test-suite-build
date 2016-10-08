@@ -17,8 +17,7 @@ check_cordova_apps() {
 
     for mode in ${MODES}; do
         for arch in ${ARCHES}; do
-            ./complete_cordova_apps.py -v ${VERSION} -m ${mode} -a ${arch} -c
-            ./complete_cordova_tc.py -v ${VERSION} -m ${mode} -a ${arch} -c
+            ./complete_cordova_apps.py -v ${VERSION} -m ${mode} -a ${arch} -q
         done
     done
 }
@@ -29,7 +28,7 @@ check_cordova_tc() {
 
     for mode in ${MODES}; do
         for arch in ${ARCHES}; do
-            ./complete_cordova_tc.py -v ${VERSION} -m ${mode} -a ${arch} -c
+            ./complete_cordova_tc.py -v ${VERSION} -m ${mode} -a ${arch} -q
         done
     done
 }
