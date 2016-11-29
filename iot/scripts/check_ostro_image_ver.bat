@@ -1,0 +1,1 @@
+"C:\python35\python.exe" check_ostro_image_ver.py
